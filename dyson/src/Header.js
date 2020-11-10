@@ -1,24 +1,32 @@
 //Header // Capital H for a the file name of a component.
 
-import React from 'react'
-import './header.css'
-// import logo from 'resources/logo.png'
-import SearchIcon from '@material-ui/icons/Search'
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
+import React from 'react';
+import './header.css';
+// import logo from 'resources/logo.png';
+// import SearchIcon from '@material-ui/icons/Search';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import {Link} from "react-router-dom";
+import { useStateValue } from './StateProvider';
 
 function Header() {
+
+    const [{basket}] = useStateValue();
     return (
         <div className="header">
-            <img className="header__logo" 
+            
+            <Link to='/'>
+            <img className="header__logo" alt=""
             src="https://knowprepinsite.000webhostapp.com/resources/dyson-logo.png" />
+            </Link>
 
-            <div className="header__search">
+            {/* <div className="header__search">
                 <input className="header__searchInput" type="text" />
-                {/*Search Icon*/}
+                
                 <SearchIcon className="header__searchIcon" />
-            </div>
+            </div>    */}
 
             <div className="header__nav">
+                <Link to='/login'>
                 <div className="header__option">
                     <span className="header__optionLineOne">
                         Hello Guest!
@@ -27,6 +35,7 @@ function Header() {
                         Sign-In
                     </span>
                 </div>
+                </Link>
                 <div className="header__option">
                     <span className="header__optionLineOne">
                         Returns 
@@ -40,13 +49,17 @@ function Header() {
                         Your
                     </span>
                     <span className="header__optionLineTwo">
-                        Prime
+                        Offers
                     </span>
                 </div>
-                <din className="header__optionBasket">
+
+                <Link to="/ checkout">
+                <div className="header__optionBasket">
                     <ShoppingBasketIcon />
-                    <span className="header__optionLineTwo header__basketCount">0</span>
-                </din>
+                    <span className="header__optionLineTwo header__basketCount">{basket?.length}</span>
+                    {/* ? is optional chaining operator in react. */}
+                </div>
+                </Link>
             </div>
 
         </div>
